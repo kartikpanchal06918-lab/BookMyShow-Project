@@ -1,0 +1,14 @@
+{% load static %}
+<form id="bms-csrf-form" hidden>{% csrf_token %}</form>
+<div id="bms-assistant" data-chat-url="{% url 'chatbot_response' %}">
+  <button id="bms-chat-toggle" type="button" aria-label="Open BookMyShow assistant">💬</button>
+  <section id="bms-chat-panel" aria-label="BookMyShow chatbot" aria-hidden="true">
+    <header class="bms-chat-header"><div><strong>BookMyShow Assistant</strong><small>Movie help · Chat and voice</small></div><button id="bms-chat-close" type="button" aria-label="Close assistant">×</button></header>
+    <div id="bms-chat-messages" aria-live="polite"><div class="bms-message bms-bot">Hi! I can help you find movies, explore genres and understand ticket booking.</div></div>
+    <div class="bms-chat-controls"><select id="bms-language" aria-label="Voice language"><option value="en-IN">English</option><option value="hi-IN">Hindi</option></select><input id="bms-chat-input" type="text" maxlength="300" placeholder="Ask about movies..." aria-label="Your message"><button id="bms-send" type="button" aria-label="Send message">➤</button><button id="bms-mic" type="button" aria-label="Speak message">🎙</button></div>
+    <label class="bms-speak-toggle"><input id="bms-speak-replies" type="checkbox" checked> Read replies aloud</label>
+    <p id="bms-voice-status" class="bms-voice-status">Choose a language and tap the microphone to speak.</p>
+  </section>
+</div>
+<link rel="stylesheet" href="{% static 'movies/chatbot.css' %}">
+<script src="{% static 'movies/chatbot.js' %}" defer></script>

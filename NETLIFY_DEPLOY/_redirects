@@ -1,0 +1,2 @@
+# Replace BACKEND-HOSTNAME with the actual Render hostname before deploying.
+/* https://BACKEND-HOSTNAME.onrender.com/:splat 200

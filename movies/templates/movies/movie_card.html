@@ -1,0 +1,3 @@
+<article class="movie-card">
+{% with poster=movie.posters.first %}{% if poster and poster.image %}<img class="poster" src="{{ poster.image.url }}" alt="{{ poster.alt_text|default:movie.title }}">{% else %}<div class="no-poster">No poster available</div>{% endif %}{% endwith %}
+<div class="movie-info"><h3>{{ movie.title }}</h3><p>{{ movie.duration }} minutes · {{ movie.age_certification }}</p><p>Released: {{ movie.release_date|date:"d M Y" }}</p><p>Rating: {% if movie.average_rating %}★ {{ movie.average_rating }}/5{% else %}Not rated{% endif %}</p><a class="btn movie-link" href="{% url 'movie_detail' movie.id %}">View Details</a></div></article>

@@ -1,0 +1,25 @@
+databases:
+  - name: bookmyshow-db
+    plan: free
+    databaseName: bookmyshow
+    user: bookmyshow
+services:
+  - type: web
+    name: bookmyshow-django
+    runtime: python
+    plan: free
+    buildCommand: ./build.sh
+    startCommand: gunicorn config.wsgi:application --bind 0.0.0.0:$PORT
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: bookmyshow-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: ALLOWED_HOSTS
+        value: ".onrender.com,.netlify.app,localhost,127.0.0.1"
+      - key: CSRF_TRUSTED_ORIGINS
+        value: "https://*.netlify.app,https://*.onrender.com"

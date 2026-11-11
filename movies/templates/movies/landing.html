@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOOKMYSHOW| Welcome</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: radial-gradient(circle at center, #30205e, #090d27 75%);
+            color: white;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        .welcome {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: clamp(55px, 10vw, 105px);
+            font-weight: bold;
+            letter-spacing: 3px;
+            text-shadow: 0 0 25px #a855f7;
+        }
+
+        .logo span {
+            display: inline-block;
+            transition: transform 1.3s cubic-bezier(.77, 0, .18, 1),
+                        opacity 1s ease;
+        }
+
+        .left-part {
+            clip-path: inset(0 0 0 0);
+        }
+
+        .right-part {
+            clip-path: inset(0 0 0 0);
+        }
+
+        .tagline {
+            margin-top: 20px;
+            font-size: clamp(18px, 3vw, 27px);
+            color: #ff456d;
+            font-weight: bold;
+            transition: opacity 0.5s ease;
+        }
+
+        .description {
+            margin-top: 15px;
+            color: #c7cbe3;
+            font-size: 16px;
+            transition: opacity 0.5s ease;
+        }
+
+        .go-btn {
+            margin-top: 45px;
+            padding: 15px 55px;
+            border-radius: 35px;
+            background: linear-gradient(90deg, #ed315c, #a13bce);
+            color: white;
+            text-decoration: none;
+            font-size: 19px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 0 20px #ed315c;
+            transition: transform 0.3s, opacity 0.5s;
+        }
+
+        .go-btn:hover {
+            transform: scale(1.12);
+            box-shadow: 0 0 35px #ed315c;
+        }
+
+        .welcome.opening .left-part {
+            transform: translateX(-110vw);
+            opacity: 0;
+        }
+
+        .welcome.opening .right-part {
+            transform: translateX(110vw);
+            opacity: 0;
+        }
+
+        .welcome.opening .tagline,
+        .welcome.opening .description,
+        .welcome.opening .go-btn {
+            opacity: 0;
+        }
+
+        .welcome.opening .logo {
+            text-shadow: none;
+        }
+
+        .fade-screen {
+            position: fixed;
+            inset: 0;
+            background: #090d27;
+            z-index: 5;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.8s ease;
+        }
+
+        .fade-screen.active {
+            opacity: 1;
+        }
+
+        @media (max-width: 600px) {
+            .logo {
+                letter-spacing: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="welcome" id="welcome">
+
+        <h1 class="logo">
+            <span class="left-part">BOOKMY</span><span class="right-part">SHOW</span>
+        </h1>
+
+        <div class="tagline">
+            Simple Booking, Perfect Seating
+        </div>
+
+        <p class="description">
+            Your movie experience starts here.
+        </p>
+
+        <button class="go-btn" id="goButton">
+            GO →
+        </button>
+
+    </div>
+
+    <div class="fade-screen" id="fadeScreen"></div>
+
+    <script>
+        const goButton = document.getElementById("goButton");
+        const welcome = document.getElementById("welcome");
+        const fadeScreen = document.getElementById("fadeScreen");
+
+        goButton.addEventListener("click", function () {
+            goButton.disabled = true;
+
+            welcome.classList.add("opening");
+
+            setTimeout(function () {
+                fadeScreen.classList.add("active");
+            }, 650);
+
+            setTimeout(function () {
+                window.location.href = "{% url 'home' %}";
+            }, 1500);
+        });
+    </script>
+
+</body>
+</html>
